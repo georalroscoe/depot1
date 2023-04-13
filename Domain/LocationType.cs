@@ -12,11 +12,11 @@ public class LocationType
 
 
     }
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public int WeightCapacity { get; set; }
+    public int WeightCapacity { get; private set; }
 
     public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
 }

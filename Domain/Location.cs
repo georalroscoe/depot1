@@ -11,11 +11,13 @@ public class Location
         LocationType = locationType;
 
     }
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public int LocationType { get; set; }
+    public int LocationType { get; private set; }
 
     public virtual LocationType? LocationTypeNavigation { get; set; }
 
     public virtual ICollection<WarehouseBatch> WarehouseBatches { get; set; } = new List<WarehouseBatch>();
+
+    
 }

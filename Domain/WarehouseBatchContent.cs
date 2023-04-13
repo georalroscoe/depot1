@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using Domain;
 
 namespace Domain;
 public class WarehouseBatchContent
 {
+    protected WarehouseBatchContent()
+    {
+        WarehouseBatchContents = new List<WarehouseBatchContent>();
+        WarehouseBatches = new List<WarehouseBatch>();
+    }
     public WarehouseBatchContent(int warehouseBatch, int manufactoringLot, int quantity)
     {
         WarehouseBatch = warehouseBatch;
@@ -14,39 +20,47 @@ public class WarehouseBatchContent
 
     }
 
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public int WarehouseBatch { get; set; }
+    public int WarehouseBatch { get; private set; }
 
-    public int ManufactoringLot { get; set; }
+    public int ManufactoringLot { get; private set; }
 
-    public int Quantity { get; set; }
+    public int Quantity { get; private set; }
 
     public virtual ManufactoringLot? ManufactoringLotNavigation { get; set; }
 
     public virtual WarehouseBatch? WarehouseBatchNavigation { get; set; }
 
-    public void MoveFromBatch(WarehouseBatchContent extractionBatch, int location, int quantity, int noRows)
-    {
-        int preQuantity = extractionBatch.Quantity;
-        if (preQuantity >= quantity)
+    public virtual ICollection<WarehouseBatchContent> WarehouseBatchContents { get; protected set; }
+    public virtual ICollection<WarehouseBatch> WarehouseBatches { get; protected set; }
+
+    public void MoveFromBatch(int location, int quantityMoving, int numberOfRows)
+    {/*might have to pass this through to get the current instance*/
+        int preQuantity = Quantity;
+
+        if (preQuantity >= quantityMoving)
         {
-            extractionBatch.Quantity = extractionBatch.Quantity - quantity;
+            Quantity = Quantity - quantityMoving;
         }
         else
         {
             Console.WriteLine("Quantity too low");
         }
 
-        Location newBatchLocation = new Location(location);
-        WarehouseBatchContent newBatch = new WarehouseBatchContent(newBatchLocation.Id, extractionBatch.ManufactoringLot, quantity);
-        
-        /* call the add method but doesn't seem to be working in here */
+        WarehouseBatch newBatchLocation = new WarehouseBatch(location);
+        WarehouseBatchContent newBatch = new WarehouseBatchContent(newBatchLocation.Id, ManufactoringLot, quantityMoving);
+        /*var or entity name?*/
 
-        if (extractionBatch.Quantity == 0)
+        WarehouseBatches.Add(newBatchLocation);
+        WarehouseBatchContents.Add(newBatch);
+        /* also defined methods for these bure unsure about what to put before the dot and in the brackets*/
+
+        if (Quantity == 0)
         {
             Console.WriteLine("warehouse batch row should be deleted");
-            if(noRows == 1)
+            /* find out how to delete for both of these*/
+            if(numberOfRows == 1)
             {
                 Console.WriteLine("batch location should be deleted");
             }
@@ -54,13 +68,12 @@ public class WarehouseBatchContent
 
         
 
-        if (preQuantity != (extractionBatch.Quantity + newBatch.Quantity )) {
-            Console.WriteLine("consistency error");
-
+        if (preQuantity != (Quantity + newBatch.Quantity )) {
+            
+            throw new Exception("consistency error");
         }
 
-
-
+        return;
 
         /* create new warehousebatchcontent
          * create new warehousebatch
@@ -71,14 +84,10 @@ public class WarehouseBatchContent
          * validate the quantities
          */
 
-        
-
-
-
 
     }
-    /*public void AddNewWarehouseBatchContent(WarehouseBatchContent batchContent)
+    public void AddNewWarehouseBatchContent(WarehouseBatchContent batchContent)
     {
-        WarehouseBatchContent.Add(batchContent);
-    }*/
+        WarehouseBatchContents.Add(batchContent);
+    }
 }

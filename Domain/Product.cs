@@ -11,11 +11,11 @@ public class Product
         Weight = weight;
 
     }
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public int Weight { get; set; }
+    public int Weight { get; private set; }
 
     public virtual ICollection<ManufactoringLot> ManufactoringLots { get; set; } = new List<ManufactoringLot>();
 }

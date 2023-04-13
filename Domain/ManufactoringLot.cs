@@ -9,9 +9,9 @@ public class ManufactoringLot
         ProductId = productId;
 
     }
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public int ProductId { get; set; }
+    public int ProductId { get; private set; }
 
     public virtual Product? Product { get; set; }
 

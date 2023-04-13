@@ -18,7 +18,9 @@ using Application.Interfaces;
 namespace PrivateWebApi
 {
     public class Startup
+
     {
+       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,6 +38,7 @@ namespace PrivateWebApi
 
             services.AddScoped<IBatchProducts, ProductBatcher>();
             services.AddScoped<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>();
+            services.AddScoped<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>();
 
 
 

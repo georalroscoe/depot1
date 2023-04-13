@@ -28,15 +28,23 @@ namespace Application
 
 
         /*creating a method which takes all the parameters and is called in the program.cs file*/
-        public void tran(int wBatch, int mLot, int quant, int loc)
+        public void tran(int wBatch, int mLot, int quantity, int location)
         {
-            var originalBatch = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == mLot && x.Id == wBatch).SingleOrDefault();
-           
-            /* couldnt get the productid from the products table in this get request*/
-            int noRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == wBatch).ToList().Count();
-            Console.WriteLine(originalBatch.ManufactoringLot);
-            WarehouseBatchContent.MoveFromBatch(originalBatch, loc, quant, noRows);
+            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == mLot && x.Id == wBatch).SingleOrDefault();
+            if (originalBatchInstance == null)
+            {
+                throw new Exception("No batch matching the input");
+            }
+            
+            /* couldnt get the productid from the products table in this get request ------ Use WarehhouseBatchContent or VAR? ------- question mark to accept nullable?*/
+            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == wBatch).ToList().Count();
+
+            originalBatchInstance.MoveFromBatch(location, quantity, numberOfRows);
+            /*_warehouseBatchContentRepo.Delete(x);
+            _warehouseBatchContentRepo.Delete(y);*/
+            /*do i have to get another repo for warehouseBatch to alter that entity?*/
             _uow.Save();
+           
                         
            
             
