@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using PrivateWebAPI.DTOs;
 
 namespace Application.Interfaces
 {
     public interface IBatchProducts
     {
-        void tran(int wBatch, int mLot, int quant, int loc);
+        void tran(ProductBatcherDto dto);
     }
 }

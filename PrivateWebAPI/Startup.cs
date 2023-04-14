@@ -14,13 +14,14 @@ using DataAccess.Repositories;
 using Domain;
 using depot.Models;
 using Application.Interfaces;
+using Microsoft.OpenApi.Models;
 
 namespace PrivateWebApi
 {
     public class Startup
 
     {
-       
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,7 +33,7 @@ namespace PrivateWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<DepotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WbacStateEngineContext")));
+            services.AddDbContext<DepotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DepotContext")));
             services.AddScoped<DbContext, DepotContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -40,23 +41,36 @@ namespace PrivateWebApi
             services.AddScoped<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>();
             services.AddScoped<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>();
 
+            services.AddControllers();
+            services.AddSwaggerGen();
+
 
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        /*public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/error");
-            }
 
-            app.UseMvc();
-        }*/
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "MVCCallWebAPI");
+            });
+
+
+
+        }
+       
     }
 }
+    
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+   
+
+

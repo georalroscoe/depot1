@@ -11,6 +11,7 @@ using DataAccess.Repositories;
 using Microsoft.Identity.Client;
 using System.Diagnostics;
 using Application.Interfaces;
+using PrivateWebAPI.DTOs;
 
 namespace Application
 {
@@ -18,6 +19,8 @@ namespace Application
     {
         private readonly IUnitOfWork _uow;
         private readonly IGenericRepository<WarehouseBatchContent> _warehouseBatchContentRepo;
+
+       
 
         public ProductBatcher(IGenericRepository<WarehouseBatchContent> warehouseBatchContentRepo, IUnitOfWork uow)
         {
@@ -28,16 +31,16 @@ namespace Application
 
 
         /*creating a method which takes all the parameters and is called in the program.cs file*/
-        public void tran(int wBatch, int mLot, int quantity, int location)
+        public void tran(ProductBatcherDto dto)
         {
-            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == mLot && x.Id == wBatch).SingleOrDefault();
+            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == manufactoringLot && x.Id == warehouseBatch).SingleOrDefault();
             if (originalBatchInstance == null)
             {
                 throw new Exception("No batch matching the input");
             }
             
             /* couldnt get the productid from the products table in this get request ------ Use WarehhouseBatchContent or VAR? ------- question mark to accept nullable?*/
-            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == wBatch).ToList().Count();
+            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == warehouseBatch).ToList().Count();
 
             originalBatchInstance.MoveFromBatch(location, quantity, numberOfRows);
             /*_warehouseBatchContentRepo.Delete(x);

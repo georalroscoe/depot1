@@ -45,7 +45,7 @@ public class WarehouseBatchContent
         }
         else
         {
-            Console.WriteLine("Quantity too low");
+            throw new Exception("Quantity too low!");
         }
 
         WarehouseBatch newBatchLocation = new WarehouseBatch(location);
@@ -54,7 +54,7 @@ public class WarehouseBatchContent
 
         WarehouseBatches.Add(newBatchLocation);
         WarehouseBatchContents.Add(newBatch);
-        /* also defined methods for these bure unsure about what to put before the dot and in the brackets*/
+        /* also defined methods for these but unsure about what to put before the dot and in the brackets*/
 
         if (Quantity == 0)
         {
