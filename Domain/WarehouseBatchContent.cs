@@ -37,26 +37,26 @@ public class WarehouseBatchContent
 
     public void MoveFromBatch(int location, int quantityMoving, int numberOfRows)
     {/*might have to pass this through to get the current instance*/
-        int preQuantity = Quantity;
+        int preQuantity = this.Quantity;
 
         if (preQuantity >= quantityMoving)
         {
-            Quantity = Quantity - quantityMoving;
+            this.Quantity -= quantityMoving;
         }
         else
         {
             throw new Exception("Quantity too low!");
         }
 
-        WarehouseBatch newBatchLocation = new WarehouseBatch(location);
-        WarehouseBatchContent newBatch = new WarehouseBatchContent(newBatchLocation.Id, ManufactoringLot, quantityMoving);
+        WarehouseBatch newBatchLocation = new(location);
+        WarehouseBatchContent newBatch = new(newBatchLocation.Id, this.ManufactoringLot, quantityMoving);
         /*var or entity name?*/
 
         WarehouseBatches.Add(newBatchLocation);
         WarehouseBatchContents.Add(newBatch);
         /* also defined methods for these but unsure about what to put before the dot and in the brackets*/
 
-        if (Quantity == 0)
+        if (this.Quantity == 0)
         {
             Console.WriteLine("warehouse batch row should be deleted");
             /* find out how to delete for both of these*/

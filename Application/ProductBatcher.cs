@@ -11,7 +11,7 @@ using DataAccess.Repositories;
 using Microsoft.Identity.Client;
 using System.Diagnostics;
 using Application.Interfaces;
-using PrivateWebAPI.DTOs;
+using Dtos;
 
 namespace Application
 {
@@ -31,18 +31,18 @@ namespace Application
 
 
         /*creating a method which takes all the parameters and is called in the program.cs file*/
-        public void tran(ProductBatcherDto dto)
+        public void BatchMover(ProductBatcherDto dto)
         {
-            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == manufactoringLot && x.Id == warehouseBatch).SingleOrDefault();
+            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == dto.ManufactoringLot && x.Id == dto.WarehouseBatch).SingleOrDefault();
             if (originalBatchInstance == null)
             {
                 throw new Exception("No batch matching the input");
             }
             
             /* couldnt get the productid from the products table in this get request ------ Use WarehhouseBatchContent or VAR? ------- question mark to accept nullable?*/
-            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == warehouseBatch).ToList().Count();
+            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == dto.WarehouseBatch).ToList().Count;
 
-            originalBatchInstance.MoveFromBatch(location, quantity, numberOfRows);
+            originalBatchInstance.MoveFromBatch(dto.Location, dto.Quantity, numberOfRows);
             /*_warehouseBatchContentRepo.Delete(x);
             _warehouseBatchContentRepo.Delete(y);*/
             /*do i have to get another repo for warehouseBatch to alter that entity?*/

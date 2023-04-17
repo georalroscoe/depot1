@@ -12,11 +12,11 @@ using Application;
 using DataAccess;
 using DataAccess.Repositories;
 using Domain;
-using depot.Models;
+
 using Application.Interfaces;
 using Microsoft.OpenApi.Models;
 
-namespace PrivateWebApi
+namespace PrivateWebAPI
 {
     public class Startup
 
@@ -32,17 +32,21 @@ namespace PrivateWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<DepotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DepotContext")));
+            
+            services.AddMvc().AddControllersAsServices(); 
+            services.AddDbContext<DepotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<DbContext, DepotContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IBatchProducts, ProductBatcher>();
-            services.AddScoped<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>();
-            services.AddScoped<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>();
-
+            services.AddTransient<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>();
+            services.AddTransient<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>();
+            services.AddTransient<IBatchProducts, ProductBatcher>();
+            
             services.AddControllers();
             services.AddSwaggerGen();
+
+
+
 
 
 

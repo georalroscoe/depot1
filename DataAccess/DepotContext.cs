@@ -5,7 +5,7 @@ using DataAccess.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 
-namespace depot.Models;
+namespace DataAccess;
 
 public class DepotContext : DbContext
 {
@@ -30,9 +30,6 @@ public class DepotContext : DbContext
 
     public virtual DbSet<WarehouseBatchContent> WarehouseBatchContents { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-1VFGI46F\\SQLExpress;Database=depot;Encrypt=false; Trusted_Connection=true");
 
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

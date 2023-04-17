@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
