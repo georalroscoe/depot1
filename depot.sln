@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrivateWebApi", "PrivateWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrivateWebAPI", "PrivateWebAPI\PrivateWebAPI.csproj", "{CA5ED3B4-36AE-4A7B-BC67-41820299E76A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtos", "Dtos\Dtos.csproj", "{B7E26466-1597-416B-B4A3-47CE3933C5F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtos", "Dtos\Dtos.csproj", "{B7E26466-1597-416B-B4A3-47CE3933C5F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

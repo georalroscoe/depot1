@@ -19,13 +19,16 @@ namespace Application
     {
         private readonly IUnitOfWork _uow;
         private readonly IGenericRepository<WarehouseBatchContent> _warehouseBatchContentRepo;
+        private readonly IGenericRepository<WarehouseBatch> _warehouseBatchRepo;
 
-       
 
-        public ProductBatcher(IGenericRepository<WarehouseBatchContent> warehouseBatchContentRepo, IUnitOfWork uow)
+
+
+        public ProductBatcher(IGenericRepository<WarehouseBatchContent> warehouseBatchContentRepo, IUnitOfWork uow, IGenericRepository<WarehouseBatch> warehouseBatch)
         {
             _warehouseBatchContentRepo = warehouseBatchContentRepo;
             _uow = uow;
+            _warehouseBatchRepo = warehouseBatch;
         }
 
 
@@ -33,16 +36,19 @@ namespace Application
         /*creating a method which takes all the parameters and is called in the program.cs file*/
         public void BatchMover(ProductBatcherDto dto)
         {
-            WarehouseBatchContent? originalBatchInstance = _warehouseBatchContentRepo.Get(x => x.ManufactoringLot == dto.ManufactoringLot && x.Id == dto.WarehouseBatch).SingleOrDefault();
-            if (originalBatchInstance == null)
+            var oldBatch = _warehouseBatchRepo.GetById(dto.OldBatchId);
+            
+
+
+            if (oldBatch == null)
             {
                 throw new Exception("No batch matching the input");
             }
             
             /* couldnt get the productid from the products table in this get request ------ Use WarehhouseBatchContent or VAR? ------- question mark to accept nullable?*/
-            int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == dto.WarehouseBatch).ToList().Count;
+            /*int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == dto.WarehouseBatch).ToList().Count;*/
 
-            originalBatchInstance.MoveFromBatch(dto.Location, dto.Quantity, numberOfRows);
+            oldBatch.MoveFromBatch(dto.NewBatchId, dto.Quantity, dto.ManufactoringLot);
             /*_warehouseBatchContentRepo.Delete(x);
             _warehouseBatchContentRepo.Delete(y);*/
             /*do i have to get another repo for warehouseBatch to alter that entity?*/

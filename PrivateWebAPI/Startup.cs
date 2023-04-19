@@ -15,6 +15,7 @@ using Domain;
 
 using Application.Interfaces;
 using Microsoft.OpenApi.Models;
+using System.Data.Services;
 
 namespace PrivateWebAPI
 {
@@ -35,20 +36,14 @@ namespace PrivateWebAPI
             
             services.AddMvc().AddControllersAsServices(); 
             services.AddDbContext<DepotContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<DbContext, DepotContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddTransient<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>();
-            services.AddTransient<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>();
-            services.AddTransient<IBatchProducts, ProductBatcher>();
+            services.AddScoped<DbContext, DepotContext>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
+                .AddTransient<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>()
+                .AddTransient<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>()
+                .AddTransient<IBatchProducts, ProductBatcher>();
             
             services.AddControllers();
             services.AddSwaggerGen();
-
-
-
-
-
 
         }
 
@@ -65,7 +60,6 @@ namespace PrivateWebAPI
             {
                 c.SwaggerEndpoint("/swagger/v2/swagger.json", "MVCCallWebAPI");
             });
-
 
 
         }

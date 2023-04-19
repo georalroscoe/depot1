@@ -9,7 +9,7 @@ public class WarehouseBatchContent
 {
     protected WarehouseBatchContent()
     {
-        WarehouseBatchContents = new List<WarehouseBatchContent>();
+     
         WarehouseBatches = new List<WarehouseBatch>();
     }
     public WarehouseBatchContent(int warehouseBatch, int manufactoringLot, int quantity)
@@ -32,62 +32,9 @@ public class WarehouseBatchContent
 
     public virtual WarehouseBatch? WarehouseBatchNavigation { get; set; }
 
-    public virtual ICollection<WarehouseBatchContent> WarehouseBatchContents { get; protected set; }
+    
     public virtual ICollection<WarehouseBatch> WarehouseBatches { get; protected set; }
 
-    public void MoveFromBatch(int location, int quantityMoving, int numberOfRows)
-    {/*might have to pass this through to get the current instance*/
-        int preQuantity = this.Quantity;
-
-        if (preQuantity >= quantityMoving)
-        {
-            this.Quantity -= quantityMoving;
-        }
-        else
-        {
-            throw new Exception("Quantity too low!");
-        }
-
-        WarehouseBatch newBatchLocation = new(location);
-        WarehouseBatchContent newBatch = new(newBatchLocation.Id, this.ManufactoringLot, quantityMoving);
-        /*var or entity name?*/
-
-        WarehouseBatches.Add(newBatchLocation);
-        WarehouseBatchContents.Add(newBatch);
-        /* also defined methods for these but unsure about what to put before the dot and in the brackets*/
-
-        if (this.Quantity == 0)
-        {
-            Console.WriteLine("warehouse batch row should be deleted");
-            /* find out how to delete for both of these*/
-            if(numberOfRows == 1)
-            {
-                Console.WriteLine("batch location should be deleted");
-            }
-        }
-
-        
-
-        if (preQuantity != (Quantity + newBatch.Quantity )) {
-            
-            throw new Exception("consistency error");
-        }
-
-        return;
-
-        /* create new warehousebatchcontent
-         * create new warehousebatch
-         * delete row from wbatchcontent if quant is 0
-         * delete row from wbatch if that was only row
-         * 
-         * 
-         * validate the quantities
-         */
-
-
-    }
-    public void AddNewWarehouseBatchContent(WarehouseBatchContent batchContent)
-    {
-        WarehouseBatchContents.Add(batchContent);
-    }
+   
+    
 }
