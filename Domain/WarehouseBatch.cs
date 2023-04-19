@@ -23,6 +23,7 @@ public class WarehouseBatch
 
     public void MoveFromBatch(int NewBatchId, int QuantityMoving, int ManufactoringLot)
     {/*might have to pass this through to get the current instance*/
+        this.WarehouseBatchContents.
         int preQuantity = this.QuantityMoving;
         this.
 

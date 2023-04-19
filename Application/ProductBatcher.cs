@@ -37,9 +37,10 @@ namespace Application
         public void BatchMover(ProductBatcherDto dto)
         {
             var oldBatch = _warehouseBatchRepo.GetById(dto.OldBatchId);
+            var quant = oldBatch.WarehouseBatchContents.Quantity;
+
+
             
-
-
             if (oldBatch == null)
             {
                 throw new Exception("No batch matching the input");
