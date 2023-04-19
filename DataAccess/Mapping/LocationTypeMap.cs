@@ -15,11 +15,11 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<LocationType> builder, string schema)
         {
 
-            builder.HasKey(e => e.Id).HasName("PK__Location__3214EC272779AC50");
+            builder.HasKey(e => e.LocationTypeId).HasName("PK__Location__3214EC272779AC50");
 
             builder.ToTable("LocationType");
 
-            builder.Property(e => e.Id).HasColumnName("ID");
+            builder.Property(e => e.LocationTypeId).HasColumnName("LocationTypeId");
             builder.Property(e => e.Name)
                 .HasMaxLength(50)
                 .IsUnicode(false);

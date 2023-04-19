@@ -15,13 +15,13 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<Location> builder, string schema)
         {
 
-            builder.HasKey(e => e.Id).HasName("PK__Location__3214EC273FDC68D8");
+            builder.HasKey(e => e.LocationId).HasName("PK__Location__3214EC273FDC68D8");
 
-            builder.Property(e => e.Id).HasColumnName("ID");
+            builder.Property(e => e.LocationId).HasColumnName("LocationId");
 
             builder.HasOne(d => d.LocationTypeNavigation).WithMany(p => p.Locations)
-                .HasForeignKey(d => d.LocationType)
-                .HasConstraintName("FK_Locations_LocationType");
+                .HasForeignKey(d => d.LocationTypeId)
+                .HasConstraintName("FK_Location_LocationType");
         }
         public void Configure(EntityTypeBuilder<Location> builder)
         {

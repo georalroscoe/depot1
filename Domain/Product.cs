@@ -11,7 +11,7 @@ public class Product
         Weight = weight;
 
     }
-    public int Id { get; private set; }
+    public int ProductId { get; private set; }
 
     public string Name { get; private set; }
 

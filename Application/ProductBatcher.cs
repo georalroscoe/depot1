@@ -36,8 +36,10 @@ namespace Application
         /*creating a method which takes all the parameters and is called in the program.cs file*/
         public void BatchMover(ProductBatcherDto dto)
         {
-            var oldBatch = _warehouseBatchRepo.GetById(dto.OldBatchId);
-            var quant = oldBatch.WarehouseBatchContents.Quantity;
+            Console.WriteLine(dto);
+            
+            var oldBatch = _warehouseBatchContentRepo.GetById(dto.OldBatchId);
+           
 
 
             
@@ -49,7 +51,7 @@ namespace Application
             /* couldnt get the productid from the products table in this get request ------ Use WarehhouseBatchContent or VAR? ------- question mark to accept nullable?*/
             /*int numberOfRows = _warehouseBatchContentRepo.Get(x => x.WarehouseBatch == dto.WarehouseBatch).ToList().Count;*/
 
-            oldBatch.MoveFromBatch(dto.NewBatchId, dto.Quantity, dto.ManufactoringLot);
+           /*oldBatch.MoveFromBatch(dto.NewBatchId, dto.Quantity, dto.ManufactoringLot);*/
             /*_warehouseBatchContentRepo.Delete(x);
             _warehouseBatchContentRepo.Delete(y);*/
             /*do i have to get another repo for warehouseBatch to alter that entity?*/

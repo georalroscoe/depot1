@@ -9,7 +9,7 @@ public class ManufactoringLot
         ProductId = productId;
 
     }
-    public int Id { get; private set; }
+    public int ManufactoringLotId { get; private set; }
 
     public int ProductId { get; private set; }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Domain;
 public class LocationType
 {
-    public LocationType(int id, string name, int weightCapacity)
+    public LocationType(string name, int weightCapacity)
     {
         
         Name = name;
@@ -12,7 +12,7 @@ public class LocationType
 
 
     }
-    public int Id { get; private set; }
+    public int LocationTypeId { get; private set; }
 
     public string Name { get; private set; }
 

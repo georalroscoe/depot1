@@ -5,15 +5,15 @@ using System.Collections.Generic;
 namespace Domain;
 public class Location
 {
-    public Location(int locationType)
+    public Location(int locationTypeId)
     {
 
-        LocationType = locationType;
+        LocationTypeId = locationTypeId;
 
     }
-    public int Id { get; private set; }
+    public int LocationId { get; private set; }
 
-    public int LocationType { get; private set; }
+    public int LocationTypeId { get; private set; }
 
     public virtual LocationType? LocationTypeNavigation { get; set; }
 

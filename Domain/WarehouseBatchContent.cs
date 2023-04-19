@@ -7,24 +7,25 @@ using Domain;
 namespace Domain;
 public class WarehouseBatchContent
 {
-    protected WarehouseBatchContent()
+    /* protected WarehouseBatchContent()
+     {
+
+         WarehouseBatches = new List<WarehouseBatch>();
+     }*/
+    public WarehouseBatchContent(int warehouseBatchContentId, int warehouseBatchId, int manufactoringLotId, int quantity)
     {
-     
-        WarehouseBatches = new List<WarehouseBatch>();
-    }
-    public WarehouseBatchContent(int warehouseBatch, int manufactoringLot, int quantity)
-    {
-        WarehouseBatch = warehouseBatch;
-        ManufactoringLot= manufactoringLot;
+        WarehouseBatchId = warehouseBatchId;
+        ManufactoringLotId= manufactoringLotId;
         Quantity= quantity;
+       
 
     }
 
-    public int Id { get; private set; }
+    public int WarehouseBatchContentId { get; private set; }
 
-    public int WarehouseBatch { get; private set; }
+    public int WarehouseBatchId { get; private set; }
 
-    public int ManufactoringLot { get; private set; }
+    public int ManufactoringLotId { get; private set; }
 
     public int Quantity { get; private set; }
 

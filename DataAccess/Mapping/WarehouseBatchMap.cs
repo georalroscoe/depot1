@@ -15,15 +15,15 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<WarehouseBatch> builder, string schema)
         {
 
-            builder.HasKey(e => e.Id).HasName("PK__Warehous__3214EC2705494396");
+            builder.HasKey(e => e.WarehouseBatchId).HasName("PK__Warehous__3214EC2705494396");
 
             builder.ToTable("WarehouseBatch");
 
-            builder.Property(e => e.Id).HasColumnName("ID");
+            builder.Property(e => e.WarehouseBatchId).HasColumnName("WarehouseBatchId");
 
             builder.HasOne(d => d.LocationNavigation).WithMany(p => p.WarehouseBatches)
-                .HasForeignKey(d => d.Location)
-                .HasConstraintName("FK_WarehouseBatch_Locations");
+                .HasForeignKey(d => d.LocationId)
+                .HasConstraintName("FK_WarehouseBatch_Location");
         }
         public void Configure(EntityTypeBuilder<WarehouseBatch> builder)
         {

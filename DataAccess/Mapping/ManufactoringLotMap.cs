@@ -15,11 +15,11 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<ManufactoringLot> builder, string schema)
         {
 
-            builder.HasKey(e => e.Id).HasName("PK__Manufact__3214EC27FC6BB080");
+            builder.HasKey(e => e.ManufactoringLotId).HasName("PK__Manufact__3214EC27FC6BB080");
 
             builder.ToTable("ManufactoringLot");
 
-            builder.Property(e => e.Id).HasColumnName("ID");
+            builder.Property(e => e.ManufactoringLotId).HasColumnName("ManufactoringLotId");
 
             builder.HasOne(d => d.Product).WithMany(p => p.ManufactoringLots)
                 .HasForeignKey(d => d.ProductId)
