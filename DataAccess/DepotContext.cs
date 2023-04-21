@@ -18,7 +18,7 @@ public class DepotContext : DbContext
     {
     }
 
-    public virtual DbSet<Location> Locations { get; set; }
+    public virtual DbSet<Location> Location { get; set; }
 
     public virtual DbSet<LocationType> LocationTypes { get; set; }
 

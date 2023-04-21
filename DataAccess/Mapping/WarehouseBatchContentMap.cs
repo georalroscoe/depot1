@@ -15,7 +15,7 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<WarehouseBatchContent> builder, string schema)
         {
 
-            builder.HasKey(e => e.WarehouseBatchContentId).HasName("PK__Warehous__3214EC27E58ACB78");
+            builder.HasKey(e => e.WarehouseBatchContentId);
 
             builder.ToTable("WarehouseBatchContent");
 

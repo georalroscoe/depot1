@@ -18,7 +18,10 @@ builder.Services.AddScoped<DbContext, DepotContext>()
     .AddScoped<IUnitOfWork, UnitOfWork>()
     .AddTransient<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>()
     .AddTransient<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>()
-    .AddTransient<IBatchProducts, ProductBatcher>();
+    .AddTransient<IBatchProducts, ProductBatcher>()
+    .AddTransient<IGenericRepository<LocationType>, GenericRepository<LocationType>>()
+    .AddTransient<IGenericRepository<Location>, GenericRepository<Location>>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

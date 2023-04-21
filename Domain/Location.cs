@@ -5,6 +5,7 @@ using System.Collections.Generic;
 namespace Domain;
 public class Location
 {
+ 
     public Location(int locationTypeId)
     {
 
@@ -19,5 +20,10 @@ public class Location
 
     public virtual ICollection<WarehouseBatch> WarehouseBatches { get; set; } = new List<WarehouseBatch>();
 
-    
+    public WarehouseBatch AddNewBatch()
+    {
+        WarehouseBatch newBatch = new WarehouseBatch(LocationId);
+        WarehouseBatches.Add(newBatch);
+        return newBatch;
+    }
 }

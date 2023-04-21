@@ -9,6 +9,7 @@
 
         public int Quantity { get; set; }
 
+        public int LocationType { get; set; }
 
     }
 }

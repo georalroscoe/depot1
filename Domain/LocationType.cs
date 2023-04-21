@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Domain;
 public class LocationType
 {
+
     public LocationType(string name, int weightCapacity)
     {
         
@@ -19,4 +20,6 @@ public class LocationType
     public int WeightCapacity { get; private set; }
 
     public virtual ICollection<Location> Locations { get; set; } = new List<Location>();
+
+    
 }
