@@ -19,8 +19,11 @@ builder.Services.AddScoped<DbContext, DepotContext>()
     .AddTransient<IGenericRepository<WarehouseBatchContent>, GenericRepository<WarehouseBatchContent>>()
     .AddTransient<IGenericRepository<WarehouseBatch>, GenericRepository<WarehouseBatch>>()
     .AddTransient<IBatchProducts, ProductBatcher>()
+    .AddTransient<IFindProducts, ProductFinder>()
     .AddTransient<IGenericRepository<LocationType>, GenericRepository<LocationType>>()
+    .AddTransient<IGenericRepository<OrderProduct>, GenericRepository<OrderProduct>>()
     .AddTransient<IGenericRepository<Location>, GenericRepository<Location>>();
+
   
 
 
