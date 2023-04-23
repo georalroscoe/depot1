@@ -8,12 +8,8 @@ using Domain;
 namespace Domain;
 public class WarehouseBatchContent
 {
-   /* protected WarehouseBatchContent()
-     {
-
-         WarehouseBatches = new List<WarehouseBatch>();
-     }*/
-    public WarehouseBatchContent(int warehouseBatchId, int manufactoringLotId, int quantity)
+   
+    public WarehouseBatchContent(int warehouseBatchId, int manufactoringLotId, int quantity) 
     {
         WarehouseBatchId = warehouseBatchId;
         ManufactoringLotId= manufactoringLotId;
@@ -33,12 +29,5 @@ public class WarehouseBatchContent
     public virtual ManufactoringLot? ManufactoringLotNavigation { get; set; }
 
     public virtual WarehouseBatch? WarehouseBatchNavigation { get; set; }
-
-    
-    public void MoveFromBatch(int quantity)
-    {
-        Quantity = quantity;
-    }
-
 
 }

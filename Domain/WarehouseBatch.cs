@@ -7,14 +7,13 @@ using System.Security.Cryptography.X509Certificates;
 namespace Domain;
 public class WarehouseBatch
 {
-    protected WarehouseBatch() { 
+    /*protected WarehouseBatch() { 
     WarehouseBatchContents = new List<WarehouseBatchContent>();
         
-    }
+    }*/
 
-    public WarehouseBatch(int locationId)
+    public WarehouseBatch()
     {
-        LocationId = locationId;
     }
 
     public int WarehouseBatchId { get; private set; }
@@ -25,48 +24,46 @@ public class WarehouseBatch
 
     public virtual ICollection<WarehouseBatchContent> WarehouseBatchContents { get; set; } = new List<WarehouseBatchContent>();
 
-    public void MoveFromBatch(WarehouseBatch NewBatchId, int QuantityMoving, int ManufactoringLot, int LocationType)
+    public void MoveFromBatch(WarehouseBatch newBatch, int quantityMoving, int ManufactoringLot)
     {
-        
+    
        
-
-        int preQuantity = WarehouseBatchContents.FirstOrDefault(x => x.ManufactoringLotId == ManufactoringLot).Quantity;
-        var Give = WarehouseBatchContents.FirstOrDefault(x=> x.ManufactoringLotId == ManufactoringLot);
-        if (Give.Quantity < QuantityMoving)
+        var GivingBatch = WarehouseBatchContents.FirstOrDefault(x=> x.ManufactoringLotId == ManufactoringLot);
+        if (GivingBatch == null)
+        {
+            throw new Exception("Giving batch is null");
+        }
+        if (GivingBatch.Quantity < quantityMoving)
         {
             throw new Exception("Quantity too low!");
         }
-        Give.Quantity = Give.Quantity - QuantityMoving;
+        GivingBatch.Quantity = GivingBatch.Quantity - quantityMoving;
 
-        var Get = NewBatchId.WarehouseBatchContents.FirstOrDefault(x => x.ManufactoringLotId == ManufactoringLot);
-        if (Get != null)
+        var GettingBatch = newBatch.WarehouseBatchContents.FirstOrDefault(x => x.ManufactoringLotId == ManufactoringLot);
+        if (GettingBatch != null)
         {
-            throw new Exception("fff");
-            Get.Quantity = Get.Quantity + QuantityMoving;
-            
+            GettingBatch.Quantity = GettingBatch.Quantity + quantityMoving;
+            /*if (GettingBatch.Quantity + QuantityMoving != preQuantity)
+            {
+                throw new Exception("Consistnecy error");
+
+            }*/
         }
-        var newWarehouseBatchContent = new WarehouseBatchContent(NewBatchId.WarehouseBatchId, ManufactoringLot, QuantityMoving);
-        NewBatchId.WarehouseBatchContents.Add(newWarehouseBatchContent);
-
-     
-
-        /*if (Give.Quantity +   != preQuantity)
+        else
         {
+            var newWarehouseBatchContent = new WarehouseBatchContent(newBatch.WarehouseBatchId, ManufactoringLot, quantityMoving);
+            newBatch.AddContents(newWarehouseBatchContent);
+            /*if (newWarehouseBatchContent.Quantity + QuantityMoving != preQuantity)
+            {
+                throw new Exception("Consistnecy error");
 
-            throw new Exception("consistency error");
-        }*/
+            }*/
+        }
+
         
-
-
-        if (Give == null) {
-            throw new Exception("sheeet");
-
-        }
-       
-        /* take quant away from warehousebatchcontent for that manulot
-         * add quant to newbatchid
-         */
-
     }
-   
+    public void AddContents(WarehouseBatchContent warehouseBatchContent)
+    {
+        WarehouseBatchContents.Add(warehouseBatchContent);
+    }
 }

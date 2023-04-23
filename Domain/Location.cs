@@ -22,8 +22,9 @@ public class Location
 
     public WarehouseBatch AddNewBatch()
     {
-        WarehouseBatch newBatch = new WarehouseBatch(LocationId);
+        WarehouseBatch newBatch = new WarehouseBatch();
         WarehouseBatches.Add(newBatch);
         return newBatch;
+        
     }
 }

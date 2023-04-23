@@ -5,11 +5,11 @@
         public int OldBatchId { get; set; }
         public int NewBatchId { get; set; }
 
-        public int ManufactoringLot { get; set; }
+        public int ManufactoringLotId { get; set; }
 
         public int Quantity { get; set; }
 
-        public int LocationType { get; set; }
+        public int LocationId { get; set; }
 
     }
 }

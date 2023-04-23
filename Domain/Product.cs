@@ -18,4 +18,6 @@ public class Product
     public int Weight { get; private set; }
 
     public virtual ICollection<ManufactoringLot> ManufactoringLots { get; set; } = new List<ManufactoringLot>();
+
+    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 }

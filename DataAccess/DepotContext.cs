@@ -29,6 +29,9 @@ public class DepotContext : DbContext
     public virtual DbSet<WarehouseBatch> WarehouseBatches { get; set; }
 
     public virtual DbSet<WarehouseBatchContent> WarehouseBatchContents { get; set; }
+    public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
+
+    public virtual DbSet<OrderProduct> OrderProducts { get; set; }
 
 
     
@@ -41,94 +44,11 @@ public class DepotContext : DbContext
         modelBuilder.ApplyConfiguration(new WarehouseBatchContentMap());
         modelBuilder.ApplyConfiguration(new ProductMap());
         modelBuilder.ApplyConfiguration(new ManufactoringLotMap());
+        modelBuilder.ApplyConfiguration(new CustomerOrderMap());
+        modelBuilder.ApplyConfiguration(new OrderProductMap());
 
 
     }
 }
 
-   
-    /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Location>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Location__3214EC273FDC68D8");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-
-            entity.HasOne(d => d.LocationTypeNavigation).WithMany(p => p.Locations)
-                .HasForeignKey(d => d.LocationType)
-                .HasConstraintName("FK_Locations_LocationType");
-        });
-
-        modelBuilder.Entity<LocationType>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Location__3214EC272779AC50");
-
-            entity.ToTable("LocationType");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<ManufactoringLot>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Manufact__3214EC27FC6BB080");
-
-            entity.ToTable("ManufactoringLot");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.ManufactoringLots)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK_ManufactoringLot_Product");
-        });
-
-        modelBuilder.Entity<Product>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC277904DC3A");
-
-            entity.ToTable("Product");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name)
-                .HasMaxLength(20)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<WarehouseBatch>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Warehous__3214EC2705494396");
-
-            entity.ToTable("WarehouseBatch");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-
-            entity.HasOne(d => d.LocationNavigation).WithMany(p => p.WarehouseBatches)
-                .HasForeignKey(d => d.Location)
-                .HasConstraintName("FK_WarehouseBatch_Locations");
-        });
-
-        modelBuilder.Entity<WarehouseBatchContent>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Warehous__3214EC27E58ACB78");
-
-            entity.ToTable("WarehouseBatchContent");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-
-            entity.HasOne(d => d.ManufactoringLotNavigation).WithMany(p => p.WarehouseBatchContents)
-                .HasForeignKey(d => d.ManufactoringLot)
-                .HasConstraintName("FK_WarehouseBatchContent_ManufactoringLot");
-
-            entity.HasOne(d => d.WarehouseBatchNavigation).WithMany(p => p.WarehouseBatchContents)
-                .HasForeignKey(d => d.WarehouseBatch)
-                .HasConstraintName("FK_WarehouseBatchContent_WarehouseBatch");
-        });
-
-        OnModelCreatingPartial(modelBuilder);
-    }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-}*/
+  

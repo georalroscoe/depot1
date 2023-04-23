@@ -21,6 +21,7 @@ builder.Services.AddScoped<DbContext, DepotContext>()
     .AddTransient<IBatchProducts, ProductBatcher>()
     .AddTransient<IGenericRepository<LocationType>, GenericRepository<LocationType>>()
     .AddTransient<IGenericRepository<Location>, GenericRepository<Location>>();
+  
 
 
 builder.Services.AddControllers();
