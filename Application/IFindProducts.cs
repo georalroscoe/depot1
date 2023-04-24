@@ -13,6 +13,8 @@ namespace Application.Interfaces
     {
         ProductLocationDto FindProducts(int productId, int quantity);
         OrderLocationDto GetOrderDetails(int orderId);
+
+
         
     }
 }

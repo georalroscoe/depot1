@@ -19,4 +19,8 @@ public class CustomerOrder
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
+    public void GetLocations()
+    {
+        throw new NotImplementedException();
+    }
 }
