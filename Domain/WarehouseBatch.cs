@@ -37,12 +37,12 @@ public class WarehouseBatch
         {
             throw new Exception("Quantity too low!");
         }
-        GivingBatch.Quantity = GivingBatch.Quantity - quantityMoving;
+        /*GivingBatch.Quantity = GivingBatch.Quantity - quantityMoving;*/
 
         var GettingBatch = newBatch.WarehouseBatchContents.FirstOrDefault(x => x.ManufactoringLotId == ManufactoringLot);
         if (GettingBatch != null)
         {
-            GettingBatch.Quantity = GettingBatch.Quantity + quantityMoving;
+            /*GettingBatch.Quantity = GettingBatch.Quantity + quantityMoving;*/
             /*if (GettingBatch.Quantity + QuantityMoving != preQuantity)
             {
                 throw new Exception("Consistnecy error");

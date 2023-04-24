@@ -24,10 +24,15 @@ public class WarehouseBatchContent
 
     public int ManufactoringLotId { get; private set; }
 
-    public int Quantity { get; set; }
+    public int Quantity { get; private set; }
 
     public virtual ManufactoringLot? ManufactoringLotNavigation { get; set; }
 
     public virtual WarehouseBatch? WarehouseBatchNavigation { get; set; }
+
+    public void TakeAwayQuantity(int quantity)
+    {
+        Quantity -= quantity;
+    }
 
 }
