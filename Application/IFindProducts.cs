@@ -11,7 +11,7 @@ namespace Application.Interfaces
    
     public interface IFindProducts
     {
-        ProductLocationDto FindProducts(int productId, int quantity);
+       
         OrderLocationDto GetOrderDetails(int orderId);
 
 

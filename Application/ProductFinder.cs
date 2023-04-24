@@ -25,7 +25,7 @@ namespace Application
 
         private readonly IGenericRepository<OrderProduct> _orderProductRepo;
 
-      
+
 
 
         public ProductFinder(IUnitOfWork uow, IGenericRepository<WarehouseBatchContent> warehouseBatchContentRepo, IGenericRepository<OrderProduct> orderProductRepo)
@@ -33,20 +33,9 @@ namespace Application
             _uow = uow;
             _warehouseBatchContentRepo = warehouseBatchContentRepo;
             _orderProductRepo = orderProductRepo;
-           
-        }
-        public OrderLocationDto GetOrderDetails1(int orderId)
-        {
-            var orderLocationDto = new OrderLocationDto();
-            orderLocationDto.OrderId = orderId;
-            var orders = _orderProductRepo.Get(x => x.OrderId == orderId).ToList();
-            foreach (var order in orders)
-            {
-                orderLocationDto.Products.Add(FindProducts(order.ProductId, order.Quantity));
 
-            }
-            return orderLocationDto;
         }
+
 
         public OrderLocationDto GetOrderDetails(int orderId)
         {
@@ -64,17 +53,26 @@ namespace Application
                     Batches = x.Product.ManufactoringLots.SelectMany(y => y.WarehouseBatchContents).Select(z => z.WarehouseBatchNavigation),
                     Locations = x.Product.ManufactoringLots.SelectMany(y => y.WarehouseBatchContents).Select(z => z.WarehouseBatchNavigation.LocationNavigation)
 
+
                 }).ToList().GroupBy(x => x.Order).Select(x => x.Key).Single();
-              
-            /* could create extra domain which is like the dto, could create locations domain object in the orderporducts domain, 
+
+            /*could create extra domain which is like the dto, could create locations domain object in the orderporducts domain, */
+           var orderprods =  order.OrderProducts.ToList();
+           
+            foreach (var o in orderprods) {
+                
+            }
 
             order.GetLocations();
+           
 
 
             return orderLocationDto;
         }
+    }
+}
 
-        public ProductLocationDto FindProducts(int productId, int quantity)
+        /*public ProductLocationDto FindProducts(int productId, int quantity)
         { 
         
          var productLocationDto = new ProductLocationDto(
@@ -132,4 +130,4 @@ namespace Application
         
         }
     }
-}
+}*/

@@ -28,8 +28,13 @@ public class OrderProduct
     public virtual CustomerOrder? CustomerOrder { get; set; }
 
     public ICollection<OrderProductLocations> OrderProductLocations { get; private set; }
-    
-   
+    public void TakeAwayQuantity(int quantity)
+    {
+        Quantity -= quantity;
+    }
+
+
+
 }
 
 public class OrderProductLocations

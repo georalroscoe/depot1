@@ -28,6 +28,8 @@ namespace DataAccess.Mapping
             builder.HasOne(d => d.Product).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.ProductId)
                 .HasConstraintName("FK_OrderProduct_Product");
+
+            builder.Ignore(i => i.OrderProductLocations);
         }
         public void Configure(EntityTypeBuilder<OrderProduct> builder)
         {
