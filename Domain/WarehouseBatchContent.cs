@@ -34,5 +34,8 @@ public class WarehouseBatchContent
     {
         Quantity -= quantity;
     }
-
+     public void GiveQuantity(int quantity)
+    {
+        Quantity += quantity;
+    }
 }
