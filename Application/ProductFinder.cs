@@ -62,6 +62,24 @@ namespace Application
            
 
             order.GetLocations();
+            
+            
+            foreach (var product in order.OrderProducts.ToList())
+            {
+                var productLocation = new ProductLocationDto();
+                productLocation.ProductId = product.ProductId;
+                productLocation.TotalQuantityRequired = product.Quantity;
+                foreach (var batch in product.OrderProductLocations.ToList())
+                {
+                    var batchLocation = new BatchLocationDto();
+                    batchLocation.Location = batch.WarehouseBatch.LocationId;
+                    batchLocation.Quantity = batch.Quantity;
+                    batchLocation.WarehouseBatch = batch.WarehouseBatch.WarehouseBatchId;
+                    productLocation.BatchLocations.Add(batchLocation);
+                }
+
+                orderLocationDto.Products.Add(productLocation);
+            }
            
 
 

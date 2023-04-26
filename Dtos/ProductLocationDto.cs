@@ -10,7 +10,7 @@ namespace Dtos
     {
         public int ProductId { get; set; }
         public int TotalQuantityRequired { get; set; }
-        public bool QuantityReached { get; set; }
+    
         public List<BatchLocationDto> BatchLocations { get; set; } = new List<BatchLocationDto>();
     }
 }
