@@ -33,11 +33,6 @@ namespace PrivateWebAPI.Controllers
                 throw new ArgumentNullException(nameof(dto)); 
             }
 
-            if (_productBatcher == null)
-            {
-                throw new NullReferenceException("_productBatcher is null.");
-            }
-
             _productBatcher.BatchMover(dto);
             
         }

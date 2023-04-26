@@ -27,12 +27,10 @@ public class Product
         foreach (var batch in ManufactoringLots.SelectMany(x => x.WarehouseBatchContents).OrderBy(x => x.Quantity))
         {
            
-                if (quantity == 0)
-                {
-                    break;
-                }
-
-
+          if (quantity == 0)
+           {
+             break;
+           }
 
             if (quantity < batch.Quantity)
             {
@@ -50,9 +48,6 @@ public class Product
                 OrderProducts.Where(x => x.ProductId == ProductId && x.OrderId == orderId).FirstOrDefault().OrderProductLocations.Add(orderProductLocations);
                
                 quantity -= batch.Quantity;
-
-
-
 
             }
         }

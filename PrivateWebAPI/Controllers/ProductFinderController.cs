@@ -24,17 +24,7 @@ namespace PrivateWebAPI.Controllers
         }
 
 
-        // GET api/<ValuesController>/5
-        [HttpGet]
-        
-        public string Get(int orderId)
-        {
-            
-            _productFinder.GetOrderDetails(orderId);
-            return "value";
-            
-        }
-
+     
        [HttpGet]
         [Route("Order/{orderId}")]
         public ActionResult<OrderLocationDto> GetProductLocationsForOrder(int orderId)

@@ -56,11 +56,7 @@ namespace Application
 
                 }).ToList().GroupBy(x => x.Order).Select(x => x.Key).Single();
 
-            /*could create extra domain which is like the dto, could create locations domain object in the orderporducts domain, */
-          
            
-           
-
             order.GetLocations();
             
             
