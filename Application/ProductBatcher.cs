@@ -36,15 +36,9 @@ namespace Application
         {
 
             var oldBatch = _warehouseBatchRepo.GetById(dto.OldBatchId);
-            var warehousebatchcontent = _warehouseBatchContentRepo.Get(x => x.WarehouseBatchId == dto.OldBatchId).ToList();
-            var warehousebatchconten = _warehouseBatchContentRepo.Get(x => x.WarehouseBatchId == dto.NewBatchId).ToList();
+            var warehousebatchcontent = _warehouseBatchContentRepo.Get(x => x.WarehouseBatchId == dto.OldBatchId || x.WarehouseBatchId == dto.NewBatchId).ToList();
             var newBatch = _warehouseBatchRepo.GetById(dto.NewBatchId);
-            /*var locationNewBatch = _locationRepo.GetById(dto.Location);
-             
-             
-             dot include */
-
-           
+            
 
             if (dto.NewBatchId == 0)
             {
