@@ -8,5 +8,5 @@ to ensure clean domain-driven design architecture.
 
 Also includes a GET request which is intended to help a warehouse worker find all the products for a specific order, clearing out the batches containing the product with the lowest quantities first.
 An order ID is passed through the WebAPI with the method GetOrderDetails() in the ProductFinder class of the application file invoked. LINQ queries are then used
-to retreive all the relevant information from the database to be passed through to the domain layer where the business logic is applied and returns the neccessary information in a 
+to retreive all the relevant information from the database to be passed through to the domain layer (Product and CustomerOrder) where the business logic is applied and returns the neccessary information in a 
 dto with embedded dto's to alert the worker of where to find the warehouse batches that contain the product required for the order.
