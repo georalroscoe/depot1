@@ -1,5 +1,5 @@
 # depot1
-A personal project which mimics the database requirements of running a warehouse, built with ASP.NET Core linked to a local SQL server. 
+This project mimics the database requirements of running a warehouse, built with ASP.NET Core linked to a local SQL server. 
 
 Includes a POST request which imitates the movement of warehouse batches between different locations. The input of a dto through the WebAPI is used with the parameters
 of the quantity, old batch ID, manufactoring lot and new batch ID, which if left as 0 will create a new batch in the location specified of the 5th optional parameter, location ID.
