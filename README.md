@@ -7,5 +7,5 @@ of the quantity, old batch ID, manufactoring lot and new batch ID, which if left
 
 Also includes a GET request which is intended to help a warehouse worker find all the products for a specific order, clearing out the product containing batches with the lowest quantities first.
 An order ID is passed through the WebAPI with the method GetOrderDetails() in the ProductFinder class of the application file being invoked. LINQ queries are then used
-to retreive all the relevant information from the database which is then passed through to the domain layer (Product and CustomerOrder) where the business logic is applied. It returns the neccessary information in a 
+to retreive all the relevant information from the database which is then passed through to the domain layer (Product and CustomerOrder). It returns the neccessary information in a 
 dto with embedded dto's to alert the worker of where to find the warehouse batches that contain the product required for the order.
